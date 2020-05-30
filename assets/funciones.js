@@ -5,6 +5,9 @@ $(document).ready(function() {
     keypressNumeric($('#txtGradiente'), true);
     pasteNumeric($('#txtGradiente'));
 
+    keypressNumeric($('#txtSeguro'), true);
+    pasteNumeric($('#txtSeguro'));
+
     $("#chk-3").change(function() {//Habilitar/ deshabilitar campo de gradiente
         if ($(this).is(':checked')){
            $('#txtGradiente').prop('disabled', false);
@@ -131,6 +134,9 @@ function simular() {
     let plazo = $('#txtPlazo').val();
     let gradiente = $.trim($('#txtGradiente').val()).replace('$', '');// Reemplazar puntos por vacío para convertir en número
     gradiente = gradiente.split('.').join('');
+    let seguro = $.trim($('#txtSeguro').val()).replace('$', '');// Reemplazar puntos por vacío para convertir en número
+    seguro = seguro.split('.').join('');
+    let cuota_inicial = $('#txtCuotaInicial').val();
 
     if (valor == ''){// Validar que se ingrese valor de préstamo
         Swal.fire({
@@ -159,6 +165,15 @@ function simular() {
         return false;
     }
 
+    if ($(".tipo:checked").length == 0){
+        Swal.fire({
+            type: 'warning',
+            title: 'Notificación',
+            text: 'Seleccione por lo menos un tipo de amortización'
+        });
+        return false;
+    }
+
     let tipo = '';// Agrupar opciones chequeadas por el usuario
     $.each($(".tipo:checked"), function(){
         tipo += $(this).val() + ',';
@@ -179,7 +194,7 @@ function simular() {
     $.ajax({
         url:'ajxCalculo.php',
         type:'POST',
-        data:{valor: valor, plazo: plazo, gradiente: gradiente, tipo: tipo},
+        data:{valor: valor, plazo: plazo, gradiente: gradiente, tipo: tipo, seguro: seguro, cuota_inicial: cuota_inicial},
         dataType:'html',
         success:function (r) {
             //console.log(r);

@@ -8,17 +8,18 @@ $oFinancial = new PHPExcel_Calculation_Financial();
 $valor = $_POST['valor'];
 $plazo = $_POST['plazo'];
 $gradiente = $_POST['gradiente'];
+$cuota_inicial_porc = $_POST['cuota_inicial'];
+$seguro = $_POST['seguro'];
 $tipo = $_POST['tipo'];
 $tipo = substr($tipo, 0, -1);
 
 $tipo = explode(',', $tipo);
 
 //Constantes
-$seguro = 24000;
 $tasa_nominal_anual = 0.1580;
 
 //Cálculos previos
-$cuota_inicial = $valor * 0.15;
+$cuota_inicial = $valor * $cuota_inicial_porc;
 $valor_refinanciar = $valor - $cuota_inicial;
 $tasa_mensual = $tasa_nominal_anual / 12;
 

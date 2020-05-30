@@ -36,6 +36,22 @@
                     </select>
                 </label>
             </div>
+            <div class="form-row">
+                <label>
+                    <span>Cuota inicial</span>
+                    <select name="txtCuotaInicial" id="txtCuotaInicial">
+                    <?php for($i = 1; $i <= 20; $i++){ ?>
+                        <option value="<?= $i / 100 ?>"><?= $i ?>%</option>
+                    <?php } ?>
+                    </select>
+                </label>
+            </div>
+            <div class="form-row form-input-name-row">
+                <label>
+                    <span>Seguro</span>
+                    <input type="text" name="txtSeguro" id="txtSeguro" placeholder="0" maxlength="8">
+                </label>
+            </div>
 			<div class="form-row form-input-name-row">
                 <label>
                     <span>Gradiente</span>
@@ -45,7 +61,7 @@
             <div class="form-row text-center">
                 <label class="form-checkbox">
                     <span>Vencida</span>
-                    <input type="checkbox" id="chk-1" class="tipo" name="chk-1" checked disabled value="1">
+                    <input type="checkbox" id="chk-1" class="tipo" name="chk-1" value="1">
                 </label>
 				<label class="form-checkbox">
                     <span>Anticipada</span>
