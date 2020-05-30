@@ -7,6 +7,7 @@
 	<title>Simulación de crédito</title>
 	<link rel="stylesheet" href="assets/styles.css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/sweetalert/css/sweetalert2.css">
 </head>
 	<header>
 		<h1>Simulación de crédito</h1>
@@ -19,7 +20,7 @@
             <div class="form-row form-input-name-row">
                 <label>
                     <span>Valor del préstamo</span>
-                    <input type="text" name="txtValor" id="txtValor">
+                    <input type="text" name="txtValor" id="txtValor" maxlength="12" placeholder="0">
                 </label>
             </div>
             <div class="form-row">
@@ -38,25 +39,25 @@
 			<div class="form-row form-input-name-row">
                 <label>
                     <span>Gradiente</span>
-                    <input type="text" name="txtGradiente" id="txtGradiente">
+                    <input type="text" name="txtGradiente" id="txtGradiente" placeholder="0" maxlength="8" disabled>
                 </label>
             </div>
             <div class="form-row text-center">
                 <label class="form-checkbox">
                     <span>Vencida</span>
-                    <input type="checkbox" class="tipo" name="chk-1" checked disabled value="1">
+                    <input type="checkbox" id="chk-1" class="tipo" name="chk-1" checked disabled value="1">
                 </label>
 				<label class="form-checkbox">
                     <span>Anticipada</span>
-                    <input type="checkbox" class="tipo" name="chk-2" value="2">
+                    <input type="checkbox" id="chk-2" class="tipo" name="chk-2" value="2">
                 </label>
 				<label class="form-checkbox">
                     <span>Gradiente aritmético</span>
-                    <input type="checkbox" class="tipo" name="chk-3" value="3">
+                    <input type="checkbox" id="chk-3" class="tipo" name="chk-3" value="3">
                 </label>
             </div>
             <div class="form-row text-center">
-                <button type="button" id="btn-simular" onclick="">Simular</button>
+                <button type="button" id="btn-simular" onclick="simular()">Simular</button>
             </div>
         </form>
 		<div class="form-validation hidden" id="resultado">
@@ -90,6 +91,7 @@
 		</div>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/sweetalert/js/sweetalert2.all.js"></script>
     <script type="text/javascript" src="assets/funciones.js"></script>
 </body>
 </html>

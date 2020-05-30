@@ -1,7 +1,21 @@
 $(document).ready(function() {
     keypressNumeric($('#txtValor'), true);
     pasteNumeric($('#txtValor'));
+
+    keypressNumeric($('#txtGradiente'), true);
+    pasteNumeric($('#txtGradiente'));
+
+    $("#chk-3").change(function() {//Habilitar/ deshabilitar campo de gradiente
+        if ($(this).is(':checked')){
+           $('#txtGradiente').prop('disabled', false);
+        } else {
+            $('#txtGradiente').prop('disabled', true);
+            $('#txtGradiente').val('');
+        }
+    });
 });
+
+/* Evento del teclado para caracteres numéricos */
 function keypressNumeric(input, punt = false) {
     input.attr('inputmode', 'numeric');
     input.keyup(function(e) {
@@ -14,6 +28,7 @@ function keypressNumeric(input, punt = false) {
     })
 }
 
+/* Evento del teclado para caracteres numéricos versión móvil */
 function keyupNumericMovil(self, event) {
     let excep = ['.', ' '];
     self.value = self.value.replace(/(,)|(-)/, '');
@@ -107,4 +122,73 @@ function puntitos(donde, caracter) {
     if (donde.value == '$') {
         donde.value = '';
     }
+}
+
+/* Función para simular crédito */
+function simular() {
+    let valor = $.trim($('#txtValor').val()).replace('$', '');// Reemplazar puntos por vacío para convertir en número
+    valor = valor.split('.').join('');
+    let plazo = $('#txtPlazo').val();
+    let gradiente = $.trim($('#txtGradiente').val()).replace('$', '');// Reemplazar puntos por vacío para convertir en número
+    gradiente = gradiente.split('.').join('');
+
+    if (valor == ''){// Validar que se ingrese valor de préstamo
+        Swal.fire({
+            type: 'warning',
+            title: 'Notificación',
+            text: 'Ingrese un valor de préstamo'
+        });
+        return false;
+    }
+
+    if (plazo == 0){// Validar que se seleccione plazo
+        Swal.fire({
+            type: 'warning',
+            title: 'Notificación',
+            text: 'Seleccione un plazo'
+        });
+        return false;
+    }
+
+    if (valor < 1000000 || valor > 100000000){// Validar que se ingrese valor de préstamo
+        Swal.fire({
+            type: 'warning',
+            title: 'Notificación',
+            text: 'El valor del préstamo debe ser entre $1.000.000 y $100.000.000'
+        });
+        return false;
+    }
+
+    let tipo = '';// Agrupar opciones chequeadas por el usuario
+    $.each($(".tipo:checked"), function(){
+        tipo += $(this).val() + ',';
+    });
+
+    $('#resultado').addClass('hidden');
+    $('#btn-simular').prop('disabled', true);
+        Swal.fire({
+        title: '',
+        html: 'Por favor, espere...',
+        timerProgressBar: true,
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        }
+        })
+    $.ajax({
+        url:'ajxCalculo.php',
+        type:'POST',
+        data:{valor: valor, plazo: plazo, gradiente: gradiente, tipo: tipo},
+        dataType:'html',
+        success:function (r) {
+            //console.log(r);
+            $('#resultado').removeClass('hidden');
+            $('#contenedor').html(r);
+            swal.close();
+            $('#btn-simular').prop('disabled', false);
+        }
+    });
+
+
 }
