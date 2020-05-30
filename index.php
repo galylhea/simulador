@@ -107,7 +107,7 @@
 			</div>
 		</div>
     </div>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="assets/jquery.min.js"></script>
     <script type="text/javascript" src="assets/sweetalert/js/sweetalert2.all.js"></script>
     <script type="text/javascript" src="assets/funciones.js"></script>
 </body>
