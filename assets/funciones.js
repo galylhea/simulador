@@ -207,3 +207,15 @@ function simular() {
 
 
 }
+
+/* Función para refrescar los campos */
+function refrescar(){
+    $('#txtValor').val('');
+    $('#txtSeguro').val('');
+    $('#txtGradiente').val('');
+    $('#txtPlazo').prop('selectedIndex',0);
+    $('#txtCuotaInicial').prop('selectedIndex',0);
+    $('.tipo').prop('checked', false);
+    $('#resultado').addClass('hidden');
+    $('#contenedor').html('');
+}

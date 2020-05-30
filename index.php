@@ -72,8 +72,9 @@
                     <input type="checkbox" id="chk-3" class="tipo" name="chk-3" value="3">
                 </label>
             </div>
-            <div class="form-row text-center">
-                <button type="button" id="btn-simular" onclick="simular()">Simular</button>
+            <div class="form-row text-center" style="display: flex; justify-content: center;">
+                <button type="button" id="btn-simular" onclick="simular()" style="margin: 10px;">Simular</button>
+                <button type="button" id="btn-simular" onclick="refrescar()" style="margin: 10px;">Refrescar</button>
             </div>
         </form>
 		<div class="form-validation hidden" id="resultado">
